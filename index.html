@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Belgard Windows Quotation Builder</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <link href='http://fonts.googleapis.com/css?family=Chivo:400,900' rel='stylesheet' type='text/css'>
+    <link href="font-awesome/css/font-awesome.css">
+</head>
+
+<body>
+    <div class='container'>
+        <div id='step_1' class="jumbotron">
+            <div id='step_1_container'>
+                <h1>
+                    Step 1: Do you want to build a window or a door?
+                    <a id='step_1_change_selection' class="btn btn-success btn-lg" role="button"></a>
+                </h1>
+                <div id='step_1_content'>
+                    <p>...</p>
+                    <p>
+                        <a href='#step_1_scroll_destination' id='window_button' class="btn btn-primary btn-lg" role="button">Window</a>
+                        <a id='door_button' class="btn btn-primary btn-lg" role="button">Door</a>
+                    </p>
+                </div>
+            </div>
+            <div id='step_1_scroll_destination'></div>
+        </div>
+        <div id='step_2' class="jumbotron">
+            <div id='step_2_container'>
+                <h1>
+                    Step 2: Choose a design?
+                </h1>
+            </div>
+            <div id='design_content'>
+                <a href='#step_2_scroll_destination' id='step_2_proceed' class="btn btn-primary btn-lg" role="button">Click me to proceed to Step 3 or choose more designs</a>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="thumbnail">
+                            <img src="images/design_a.png">
+                            <div class="caption">
+                                <h3>Top hung over side hung</h3>
+                                <p><a id='design_a' class="btn btn-primary" role="button">select</a>
+                                    <a id='selected_design_a' class="btn btn-success" role="button">selected</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="thumbnail">
+                            <img src="images/design_b.png">
+                            <div class="caption">
+                                <h3>Top hung over side hung</h3>
+                                <p><a id='design_b' class="btn btn-primary" role="button">select</a>
+                                    <a id='selected_design_b' class="btn btn-success" role="button">selected</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="thumbnail">
+                            <img src="images/design_c.png">
+                            <div class="caption">
+                                <h3>Top hung over side hung</h3>
+                                <p><a id='design_c' class="btn btn-primary" role="button">select</a>
+                                    <a id='selected_design_c' class="btn btn-success" role="button">selected</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="thumbnail">
+                            <img src="images/design_d.png">
+                            <div class="caption">
+                                <h3>Top hung over side hung</h3>
+                                <p><a id='design_d' class="btn btn-primary" role="button">select</a>
+                                    <a id='selected_design_d' class="btn btn-success" role="button">selected</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="thumbnail">
+                            <img src="images/design_e.png">
+                            <div class="caption">
+                                <h3>Top hung over side hung</h3>
+                                <p><a id='design_e' class="btn btn-primary" role="button">select</a>
+                                    <a id='selected_design_e' class="btn btn-success" role="button">selected</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="thumbnail">
+                            <img src="images/design_f.png">
+                            <div id='test' class="caption">
+                                <h3>Top hung over side hung</h3>
+                                <p><a id='design_f' class="btn btn-primary" role="button">select</a>
+                                    <a id='selected_design_f' class="btn btn-success" role="button">selected</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div id='step_2_scroll_destination'></div> -->
+        </div>
+        <div id='step_3' class="jumbotron">
+            <div id='step_3_container'>
+                <h1>
+                    Step 3: Choose dimensions.
+                </h1>
+                <div id='designs'></div>
+                <a id='proceed_to_step_4' class="btn btn-primary" role="button">Step 4</a>
+                <div id='step_2_scroll_destination'></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script src="js/jquery.smooth-scroll.js"></script>
+    <script src="js/app.js"></script>
+    <!--     <script type="text/javascript" src="http://s3.amazonaws.com/scripts.hellobar.com/5c7b40fc1e8585df46d93ab4d6e6b709de466cc5.js"></script> -->
+</body>
+
+</html>
