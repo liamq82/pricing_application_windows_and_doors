@@ -16,6 +16,20 @@ $(document).ready(function() {
         this.id = id;
     };
 
+    function validateFields(product) {
+        var valid = true;
+        if (product.location === '') {
+            valid = false;
+        } else if (product.width < 0 || product.width > 3000 || product.height < 0 || product.height > 5000) {
+            valid = false;
+        } else if (isNaN(product.width) || isNaN(product.height)) {
+            valid = false;
+        } else if (product.width === '' || product.height === '') {
+            valid = false;
+        }
+        return valid;
+    }
+
     $("#step_1_change_selection").hide();
     $("#step_2").hide();
     $("#step_3").hide();
@@ -76,32 +90,38 @@ $(document).ready(function() {
             var data_plus_str = data_fields + str;
             var html = $.parseHTML(data_plus_str);
             $step3.append(html);
+            var location_input = '#' + product.id + ' #location';
+            $(location_input).val(product.location);
         });
 
         $('.form-control').bind('keyup', function() {
             var input = $(this).val();
             var product_id = $(this).parent().parent().parent().parent().attr('id');
             var product_index = -1;
-            
+
             for (var i = 0; i < products.length; i++) {
                 var this_product_id = products[i].id;
-                if(product_id == this_product_id){
+                if (product_id == this_product_id) {
                     product_index = i;
                 }
             }
 
-            if($(this).attr('id') === 'location'){
+            if ($(this).attr('id') === 'location') {
                 products[product_index].location = input;
-            }else if($(this).attr('id') === 'width'){
-                products[product_index].width = input;                
-            }else if($(this).attr('id') === 'height'){
-                products[product_index].height = input;                
-            }else if($(this).attr('id') === 'color'){
-                products[product_index].color = input;                
+            } else if ($(this).attr('id') === 'width') {
+                products[product_index].width = input;
+            } else if ($(this).attr('id') === 'height') {
+                products[product_index].height = input;
+            } else if ($(this).attr('id') === 'color') {
+                products[product_index].color = input;
             }
 
-            console.log(products);
-
+            var valid = validateFields(products[product_index]);
+            if (valid) {
+                $("#proceed_to_step_4").show();
+            } else {
+                $("#proceed_to_step_4").hide();
+            }
         });
     });
 
