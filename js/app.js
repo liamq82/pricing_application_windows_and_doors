@@ -60,6 +60,25 @@ $(document).ready(function() {
     });
 
     $("#design_content a[id^='design']").click(function() {
+        var product_id = Math.floor((Math.random() * 100) + 1);
+        var selected_design = $(this).attr('id');
+        var my_product = new product('window', '', '', selected_design, product_id);
+        products.push(my_product);
+        $(this).siblings().show();
+        $("#step_3").slideDown();
+
+        $('#designs').children().remove();
+        $.each(products, function(index, product) {
+            var $step3 = $("#designs");
+            var data_fields = "<div id=" + product.id + " class='row'><div class='col-xs-1'></div><div class='col-xs-4'><div class='thumbnail'><div class='input-group'><input id='location' type='text' class='form-control' placeholder='Window name/location'><span class='input-group-addon'></span></div><div class='input-group'><input id='width' type='text' class='form-control' placeholder='Width'><span class='input-group-addon'>milimeters</span></div><div class='input-group'><input type='text' class='form-control' placeholder='Height'><span class='input-group-addon'>milimeters</span></div><div class='input-group'><input type='text' class='form-control' placeholder='Color'><span class='input-group-addon'></span></div></div></div>";
+            var str = "<div class='col-xs-4'><div class='thumbnail'><img id='step_3_selected_design' src='images/" + product.design + ".png'></div></div></div>";
+            var data_plus_str = data_fields + str;
+            var html = $.parseHTML(data_plus_str);
+            $step3.append(html);
+        });
+    });
+
+    /*    $("#design_content a[id^='design']").click(function() {
         var product_id = Math.floor((Math.random()*100)+1);
         var add_design;
         var selected_design = $(this).attr('id');
@@ -134,6 +153,6 @@ $(document).ready(function() {
             $("#step_2_proceed").show();
         }
 
-    });
+    });*/
 
 });
