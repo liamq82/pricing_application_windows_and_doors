@@ -7,8 +7,9 @@ $(document).ready(function() {
     // $("#design_content a[id^='design']").smoothScroll();
     $('#step_2_proceed').smoothScroll();
 
-    function product(type, width, height, design, id) {
+    function product(type, location, width, height, design, id) {
         this.type = type;
+        this.location = location;
         this.width = width;
         this.height = height;
         this.design = design;
@@ -62,7 +63,7 @@ $(document).ready(function() {
     $("#design_content a[id^='design']").click(function() {
         var product_id = Math.floor((Math.random() * 100) + 1);
         var selected_design = $(this).attr('id');
-        var my_product = new product('window', '', '', selected_design, product_id);
+        var my_product = new product('window', '', '', '', selected_design, product_id);
         products.push(my_product);
         $(this).siblings().show();
         $("#step_3").slideDown();
@@ -75,6 +76,26 @@ $(document).ready(function() {
             var data_plus_str = data_fields + str;
             var html = $.parseHTML(data_plus_str);
             $step3.append(html);
+        });
+
+        $('.form-control').bind('keyup', function() {
+            var input = $(this).val();
+            var product_id = $(this).parent().parent().parent().parent().attr('id');
+            var product_index = -1;
+            
+            for (var i = 0; i < products.length; i++) {
+                var this_product_id = products[i].id;
+                if(product_id == this_product_id){
+                    product_index = i;
+                }
+            }
+
+            if($(this).attr('id') === 'location'){
+                products[product_index].location = input;
+            }
+
+            console.log(products);
+
         });
     });
 
