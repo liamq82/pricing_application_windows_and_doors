@@ -1,1 +1,17 @@
 Online pricing application for my dad's window and door company.
+
+Tools and technologies:
+HTML, Javascript, jQuery, Bootstrap
+
+To view: 
+
+Option 1 - download as a zip file
+
+Step 1: download as zip file.
+Step 2: extract files.
+Step 3: navigate into folder to index.html page and open in chrome.
+
+Option 2 - clone
+
+Step 1: clone to local machine following instructions on github help.
+Step 2: open index.html page and enjoy.
