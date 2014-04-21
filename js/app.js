@@ -71,7 +71,7 @@ $(document).ready(function() {
         $('#designs').children().remove();
         $.each(products, function(index, product) {
             var $step3 = $("#designs");
-            var data_fields = "<div id=" + product.id + " class='row'><div class='col-xs-1'></div><div class='col-xs-4'><div class='thumbnail'><div class='input-group'><input id='location' type='text' class='form-control' placeholder='Window name/location'><span class='input-group-addon'></span></div><div class='input-group'><input id='width' type='text' class='form-control' placeholder='Width'><span class='input-group-addon'>milimeters</span></div><div class='input-group'><input type='text' class='form-control' placeholder='Height'><span class='input-group-addon'>milimeters</span></div><div class='input-group'><input type='text' class='form-control' placeholder='Color'><span class='input-group-addon'></span></div></div></div>";
+            var data_fields = "<div id=" + product.id + " class='row'><div class='col-xs-1'></div><div class='col-xs-4'><div class='thumbnail'><div class='input-group'><input id='location' type='text' class='form-control' placeholder='Window name/location'><span class='input-group-addon'></span></div><div class='input-group'><input id='width' type='text' class='form-control' placeholder='Width'><span class='input-group-addon'>milimeters</span></div><div class='input-group'><input id='height' type='text' class='form-control' placeholder='Height'><span class='input-group-addon'>milimeters</span></div><div class='input-group'><input id='color' type='text' class='form-control' placeholder='Color'><span class='input-group-addon'></span></div></div></div>";
             var str = "<div class='col-xs-4'><div class='thumbnail'><img id='step_3_selected_design' src='images/" + product.design + ".png'></div></div></div>";
             var data_plus_str = data_fields + str;
             var html = $.parseHTML(data_plus_str);
@@ -92,6 +92,12 @@ $(document).ready(function() {
 
             if($(this).attr('id') === 'location'){
                 products[product_index].location = input;
+            }else if($(this).attr('id') === 'width'){
+                products[product_index].width = input;                
+            }else if($(this).attr('id') === 'height'){
+                products[product_index].height = input;                
+            }else if($(this).attr('id') === 'color'){
+                products[product_index].color = input;                
             }
 
             console.log(products);
