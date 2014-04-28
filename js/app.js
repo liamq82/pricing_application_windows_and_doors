@@ -1,21 +1,5 @@
 $(document).ready(function() {
 
-    $('#door_button').click(function() {
-        xmlHttpReq = new XMLHttpRequest();
-        xmlHttpReq.open("POST", "php/test.php", true);
-        xmlHttpReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlHttpReq.send("fname=Henry&lname=Ford");
-        xmlHttpReq.onreadystatechange = function() {
-            console.log(xmlHttpReq.readyState);
-            console.log(xmlHttpReq);
-            if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
-                console.log(xmlHttpReq.responseText);
-            }
-        }
-        console.log(xmlHttpReq);
-
-    });
-
     var products = [];
     var input_fields_valid = false;
 
@@ -126,7 +110,7 @@ $(document).ready(function() {
         $("#step_2").slideDown();
         $("#step_1_change_selection").text('Window .... click to change');
         $("#step_1_change_selection").show('slow');
-     });
+    });
 
     $("#door_button").click(function() {
         $('#step_1_content').slideUp();
@@ -185,7 +169,7 @@ $(document).ready(function() {
             return false;
         });
 
-        $('#proceed_to_step_4').on('click', function(){
+        $('#proceed_to_step_4').on('click', function() {
             $('#step_4').slideDown();
         });
 
@@ -195,22 +179,21 @@ $(document).ready(function() {
             $("#step_2_proceed").show();
         }
     });
-    
-    $('#submit_data').on('click', function(){
+
+    $('#submit_data').on('click', function() {
         var name = $('#name_input').val();
         var email = $('#email_input').val();
         var mobile = $('#mobile_input').val();
 
-        xmlHttpReq = new XMLHttpRequest();
-        xmlHttpReq.open("POST", "php/build_quotation.php", true);
-        xmlHttpReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlHttpReq.send("name=" + name + "&email=" + email + "&mobile=" + mobile);
-        console.log(xmlHttpReq);
-        xmlHttpReq.onreadystatechange = function() {
-            if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
-                console.log(xmlHttpReq.responseText);
-            }
-        }
+        $.post("php/build_quotation.php", {
+            name: name,
+            email: email,
+            mobile: mobile
+        })
+            .done(function(data) {
+                console.log('Sent back from server: ' + data);
+            });
+
     });
 
 });
