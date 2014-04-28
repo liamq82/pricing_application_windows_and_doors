@@ -23,6 +23,7 @@
                     <a id='step_1_change_selection' class="btn btn-success btn-lg" role="button"></a>
                 </h1>
                 <div id='step_1_content'>
+                    <?php /*$to="liamq82@gmail.com" ; $subject="This is subject" ; $message="This is simple text message." ; $header="From:liamq82@gmail.com \r\n" ; $retval=m ail ($to,$subject,$message,$header); if( $retval==t rue ) { echo "Message sent successfully..."; } else { echo "Message could not be sent..."; }*/ ?>
                     <p>...</p>
                     <p>
                         <a href='#step_1_scroll_destination' id='window_button' class="btn btn-primary btn-lg" role="button">Window</a>
@@ -111,7 +112,7 @@
                     </div>
                 </div>
             </div>
-            <!-- <div id='step_2_scroll_destination'></div> -->
+            <div id='step_2_scroll_destination'></div>
         </div>
         <div id='step_3' class="jumbotron">
             <div id='step_3_container'>
@@ -119,8 +120,38 @@
                     Step 3: Choose dimensions.
                 </h1>
                 <div id='designs'></div>
-                <a id='proceed_to_step_4' class="btn btn-primary" role="button">Step 4</a>
-                <div id='step_2_scroll_destination'></div>
+                <a href='#step_3_scroll_destination' id='proceed_to_step_4' class="btn btn-primary" role="button">Step 4</a>
+                <!-- <div id='step_2_scroll_destination'></div> -->
+            </div>
+            <div id='step_3_scroll_destination'></div>
+        </div>
+        <div id='step_4' class="jumbotron">
+            <div id='step_4_container'>
+                <h1>
+                    Step 4: Enter contact information.
+                </h1>
+                <div id='designs'>
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">Required</span>
+                                <input id='name_input' type="text" class="form-control" placeholder="Name">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">Required</span>
+                                <input id='email_input' type="text" class="form-control" placeholder="Email">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">Optional</span>
+                                <input id='mobile_input' type="text" class="form-control" placeholder="Mobile">
+                            </div>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                </div>
+                <a id='submit_data' class="btn btn-primary" role="button">Submit</a>
+                <!-- <div id='step_3_scroll_destination'></div> -->
             </div>
         </div>
     </div>
