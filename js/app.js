@@ -1,17 +1,30 @@
 $(document).ready(function() {
 
+    $('#door_button').click(function() {
+        xmlHttpReq = new XMLHttpRequest();
+        xmlHttpReq.open("POST", "php/test.php", true);
+        xmlHttpReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlHttpReq.send("fname=Henry&lname=Ford");
+        xmlHttpReq.onreadystatechange = function() {
+            console.log(xmlHttpReq.readyState);
+            console.log(xmlHttpReq);
+            if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
+                console.log(xmlHttpReq.responseText);
+            }
+        }
+        console.log(xmlHttpReq);
 
+    });
 
     var products = [];
     var input_fields_valid = false;
 
     $('#window_button').smoothScroll();
-    // $("#design_content a[id^='design']").smoothScroll();
     $('#step_2_proceed').smoothScroll();
+    $('#proceed_to_step_4').smoothScroll();
 
-    function updateModel() {
+    function updateModel(product_id) {
         var input = $(this).val();
-        var product_id = $(this).parent().parent().parent().parent().attr('id');
         var product_index = -1;
 
         for (var i = 0; i < products.length; i++) {
@@ -34,19 +47,20 @@ $(document).ready(function() {
         return product_index;
     }
 
-    function product(type, location, width, height, design, id) {
+    function product(type, location, width, height, design, color, id) {
         this.type = type;
         this.location = location;
         this.width = width;
         this.height = height;
         this.design = design;
+        this.color = color;
         this.id = id;
     };
 
     function createNewProduct() {
         var product_id = Math.floor((Math.random() * 100) + 1);
         var selected_design = $(this).attr('id');
-        var my_product = new product('window', '', '', '', selected_design, product_id);
+        var my_product = new product('window', '', '', '', selected_design, '', product_id);
         products.push(my_product);
         return product_id
     }
@@ -73,7 +87,7 @@ $(document).ready(function() {
 
     function renderProductDataAndDesigns(product) {
         var $step3 = $("#designs");
-        var data_fields = "<div id=" + product.id + " class='row'><div class='col-xs-1'></div><div class='col-xs-4'><div class='thumbnail'><div class='input-group'><input id='location' type='text' class='form-control' placeholder='Window name/location'><span class='input-group-addon'></span></div><div class='input-group'><input id='width' type='text' class='form-control' placeholder='Width'><span class='input-group-addon'>milimeters</span></div><div class='input-group'><input id='height' type='text' class='form-control' placeholder='Height'><span class='input-group-addon'>milimeters</span></div><div class='btn-group btn-input clearfix'><button type='button' class='btn btn-default dropdown-toggle form-control' data-toggle='dropdown'><span data-bind='label'>White</span><span class='caret'></span></button><ul class='dropdown-menu' role='menu'><li><a href='#'>White</a></li><li><a href='#'>Cream</a></li><li><a href='#'>Woodgrain</a></li></ul></div></div></div>";
+        var data_fields = "<div id=" + product.id + " class='row'><div class='col-xs-1'></div><div class='col-xs-4'><div class='thumbnail'><div class='input-group'><input id='location' type='text' class='form-control' placeholder='Window name/location'><span class='input-group-addon'></span></div><div class='input-group'><input id='width' type='text' class='form-control' placeholder='Width'><span class='input-group-addon'>milimeters</span></div><div class='input-group'><input id='height' type='text' class='form-control' placeholder='Height'><span class='input-group-addon'>milimeters</span></div><div class='btn-group btn-input clearfix'><button type='button' class='btn btn-default dropdown-toggle form-control' data-toggle='dropdown'><span data-bind='label'>White</span><span class='caret'></span></button><ul class='dropdown-menu' role='menu'><li><a>White</a></li><li><a>Cream</a></li><li><a>Woodgrain</a></li></ul></div></div></div>";
         var str = "<div class='col-xs-4'><div class='thumbnail'><img id='step_3_selected_design' src='images/" + product.design + ".png'></div></div></div>";
         var data_plus_str = data_fields + str;
         var html = $.parseHTML(data_plus_str);
@@ -84,11 +98,21 @@ $(document).ready(function() {
         $(selector_width).val(product.width);
         var selector_height = '#' + product.id + ' #height';
         $(selector_height).val(product.height);
+
+        if (product.color === '') {
+            product.color = 'White';
+        }
+        var selector_color = '#' + product.id + ' [data-bind="label"]';
+        $(selector_color).text(product.color);
+
+        var selector_colors = '#' + product.id + ' a';
+        $(selector_colors).css("cursor", "pointer");
     }
 
     $("#step_1_change_selection").hide();
     $("#step_2").hide();
     $("#step_3").hide();
+    $('#step_4').hide();
     $("#step_2 a[id^='selected']").hide();
     $("#step_2_proceed").hide();
     $("#proceed_to_step_4").hide();
@@ -102,7 +126,7 @@ $(document).ready(function() {
         $("#step_2").slideDown();
         $("#step_1_change_selection").text('Window .... click to change');
         $("#step_1_change_selection").show('slow');
-    });
+     });
 
     $("#door_button").click(function() {
         $('#step_1_content').slideUp();
@@ -142,18 +166,27 @@ $(document).ready(function() {
         });
 
         $('.form-control').bind('keyup', function() {
-            var product_index = updateModel.call(this);
+            var product_id = $(this).parent().parent().parent().parent().attr('id');
+            var product_index = updateModel.call(this, product_id);
             validateFields(products[product_index]);
-
         });
 
         $('.dropdown-menu li').on('click', function(event) {
+            var product_id = $(this).parent().parent().parent().parent().parent().attr('id');
+            var product_index = updateModel.call(this, product_id);
+            validateFields(products[product_index]);
             var $target = $(event.currentTarget);
+            var color = $target.text();
+            products[product_index].color = color;
             var btn_group = $target.closest('.btn-group');
             btn_group.find('[data-bind="label"]').text($target.text());
             var dropdown_toggle = $target.children('.dropdown-toggle');
             dropdown_toggle.dropdown('toggle');
             return false;
+        });
+
+        $('#proceed_to_step_4').on('click', function(){
+            $('#step_4').slideDown();
         });
 
         if (products.length === 0) {
@@ -162,4 +195,22 @@ $(document).ready(function() {
             $("#step_2_proceed").show();
         }
     });
+    
+    $('#submit_data').on('click', function(){
+        var name = $('#name_input').val();
+        var email = $('#email_input').val();
+        var mobile = $('#mobile_input').val();
+
+        xmlHttpReq = new XMLHttpRequest();
+        xmlHttpReq.open("POST", "php/build_quotation.php", true);
+        xmlHttpReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlHttpReq.send("name=" + name + "&email=" + email + "&mobile=" + mobile);
+        console.log(xmlHttpReq);
+        xmlHttpReq.onreadystatechange = function() {
+            if (xmlHttpReq.readyState == 4 && xmlHttpReq.status == 200) {
+                console.log(xmlHttpReq.responseText);
+            }
+        }
+    });
+
 });
