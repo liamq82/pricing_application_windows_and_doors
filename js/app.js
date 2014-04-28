@@ -165,7 +165,7 @@ $(document).ready(function() {
             renderProductDataAndDesigns(product);
         });
 
-        $('.form-control').bind('keyup', function() {
+        $('#step_3 .form-control').bind('keyup', function() {
             var product_id = $(this).parent().parent().parent().parent().attr('id');
             var product_index = updateModel.call(this, product_id);
             validateFields(products[product_index]);
