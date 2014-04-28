@@ -12,17 +12,21 @@
 #step_1_container {
 }
 #step_2_proceed {
-	right: 8%;
+    right: 8%;
     position: fixed;
     top: 0px;
     z-index: 1;
 }
 
 .input-group {
-	padding-bottom: 10px;
-	padding-top: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 
-#proceed_to_step_4 {
-	float: right;
+#proceed_to_step_4, #submit_data {
+    float: right;
+}
+
+.input-group-addon {
+    min-width: 83px;
 }
