@@ -1,5 +1,12 @@
 $(document).ready(function() {
 
+    $('#door_button').on('click', function(){
+        var JSON_array = 'json=[{"width": 300, "height": 200},{"width": 100, "height": 200}]';
+        $.post("php/json_decoder.php", JSON_array).done(function(data) {
+            console.log('from server: ' + data);
+        });
+    });
+
     var products = [];
     var input_fields_valid = false;
 
@@ -185,14 +192,21 @@ $(document).ready(function() {
         var email = $('#email_input').val();
         var mobile = $('#mobile_input').val();
 
-        $.post("php/build_quotation.php", {
-            name: name,
-            email: email,
-            mobile: mobile
-        })
-            .done(function(data) {
-                console.log('Sent back from server: ' + data);
-            });
+        var POST_data = 'json=';
+        var products_json_string = JSON.stringify(products);
+        POST_data = POST_data + products_json_string;
+        $.post("php/json_decoder.php", POST_data).done(function(data) {
+            console.log('from server: ' + data);
+        });
+
+
+/*        var POST_data = 'window1=';
+        var window1 = products[0];
+        var window1_string = JSON.stringify(window1);
+        POST_data = POST_data + window1_string;
+        $.post("test.php", POST_data).done(function(data) {
+            console.log('Sent back from server: ' + data);
+        });*/
 
     });
 
